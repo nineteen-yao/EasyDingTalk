@@ -26,7 +26,7 @@ class Application extends \EasyDingTalk\Application
         \YEasyDingTalk\Employee\ServiceProvider::class,
         \YEasyDingTalk\UserV2\ServiceProvider::class,
         \YEasyDingTalk\Process\ServiceProvider::class,
-//        \YEasyDingTalk\Attendance\ServiceProvider::class,
+        \YEasyDingTalk\Attendance\ServiceProvider::class,
     ];
 
     public function __construct($config = [], array $values = [])
