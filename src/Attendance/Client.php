@@ -38,6 +38,13 @@ class Client extends \EasyDingTalk\Attendance\Client
         ]);
     }
 
+    /**
+     * 获取考勤组的KEY
+     *
+     * @param string $groupId
+     * @return array|object|\Overtrue\Http\Support\Collection|\Psr\Http\Message\ResponseInterface|string
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
     public function groupKey(string $groupId)
     {
         return $this->client->postJson('topapi/attendance/groups/idtokey', [
@@ -45,6 +52,15 @@ class Client extends \EasyDingTalk\Attendance\Client
         ]);
     }
 
+    /**
+     * 打卡位置查询
+     *
+     * @param string $groupKey
+     * @param int    $size
+     * @param null   $cursor
+     * @return array|object|\Overtrue\Http\Support\Collection|\Psr\Http\Message\ResponseInterface|string
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
     public function positions(string $groupKey, $size = 50, $cursor = null)
     {
         $params = [
@@ -56,5 +72,21 @@ class Client extends \EasyDingTalk\Attendance\Client
         }
 
         return $this->client->postJson('topapi/attendance/group/positions/query', $params);
+    }
+
+    /**
+     * 添加打卡地点
+     *
+     * @param string $groupKey
+     * @param array  $addressConfig 地点配置 {address:'',foreign_id:'',longitude:'',latitude:''}
+     * @return array|object|\Overtrue\Http\Support\Collection|\Psr\Http\Message\ResponseInterface|string
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    public function positionAdd(string $groupKey, array $addressConfig)
+    {
+        return $this->client->postJson('topapi/attendance/group/positions/add', [
+            'group_key' => $groupKey,
+            'position_list' => $addressConfig
+        ]);
     }
 }
