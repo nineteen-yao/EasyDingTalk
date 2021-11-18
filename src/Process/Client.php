@@ -92,7 +92,7 @@ class Client extends \EasyDingTalk\Process\Client
             }
         }
 
-        $response['result'] = $details;
+        $response['result']['list'] = $details;
 
         return $response;
     }
