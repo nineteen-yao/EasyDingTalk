@@ -13,6 +13,23 @@ class Client extends \EasyDingTalk\Process\Client
 {
 
     /**
+     * 获取审批实例，将实例ID加入到结果中返回
+     *
+     * @param string $id
+     * @return mixed
+     */
+    public function get($id)
+    {
+        $res = parent::get($id);
+
+        if ($res['errcode'] === 0) {
+            $res['instance_id'] = $id;
+        }
+
+        return $res;
+    }
+
+    /**
      * 查询用户待办任务
      *
      * @param string $userId
