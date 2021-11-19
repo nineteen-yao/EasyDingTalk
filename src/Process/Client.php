@@ -24,6 +24,7 @@ class Client extends \EasyDingTalk\Process\Client
 
         if ($res['errcode'] === 0) {
             $res['instance_id'] = $id;
+            $res['process_instance']['instance_id'] = $id;
         }
 
         return $res;
