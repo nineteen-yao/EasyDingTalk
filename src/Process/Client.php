@@ -114,4 +114,30 @@ class Client extends \EasyDingTalk\Process\Client
 
         return $response;
     }
+
+    /**
+     * 添加评论
+     *
+     * @param string $instanceId
+     * @param string $userId
+     * @param string $text
+     * @param array  $file
+     * @return array|object|\Overtrue\Http\Support\Collection|\Psr\Http\Message\ResponseInterface|string
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    public function addComment(string $instanceId, string $userId, string $text, array $file = [])
+    {
+        $request = [
+            'comment_userid' => $userId,
+            'process_instance_id' => $instanceId,
+            'text' => $text
+        ];
+        if (!empty($file)) {
+            $request['file'] = $file;
+        }
+
+        return $this->client->postJson('topapi/process/instance/comment/add', [
+            'request' => $request
+        ]);
+    }
 }
